@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathGenius Pro | Aprèn Matemàtiques Divertint-te</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --math-blue: #3a86ff;
+            --math-orange: #ff9e00;
+            --math-green: #06d6a0;
+            --math-purple: #7209b7;
+            --easy: #06d6a0;
+            --medium: #ffd166;
+            --hard: #ef476f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8rem;
+        }
+        
+        .logo i {
+            margin-right: 0.8rem;
+            color: var(--math-orange);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(67, 97, 238, 0.9), rgba(63, 55, 201, 0.7));
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Fredoka One', cursive;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--math-orange);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background-color: #ff8c00;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Features */
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-family: 'Fredoka One', cursive;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--dark);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Temes */
+        .temes {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem 1rem;
+            background-color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .tema {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .tema.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tema-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tema-icon {
+            font-size: 2rem;
+            color: var(--math-orange);
+            margin-right: 1rem;
+        }
+        
+        .tema h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .difficulty-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .difficulty-tab {
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .difficulty-tab.active {
+            color: var(--primary);
+        }
+        
+        .difficulty-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .difficulty-tab.easy.active {
+            color: var(--easy);
+        }
+        
+        .difficulty-tab.easy.active::after {
+            background-color: var(--easy);
+        }
+        
+        .difficulty-tab.medium.active {
+            color: var(--medium);
+        }
+        
+        .difficulty-tab.medium.active::after {
+            background-color: var(--medium);
+        }
+        
+        .difficulty-tab.hard.active {
+            color: var(--hard);
+        }
+        
+        .difficulty-tab.hard.active::after {
+            background-color: var(--hard);
+        }
+        
+        .exercicis-container {
+            display: none;
+        }
+        
+        .exercicis-container.active {
+            display: block;
+        }
+        
+        .exercicis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .exercici {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .exercici.easy {
+            border-left: 4px solid var(--easy);
+        }
+        
+        .exercici.medium {
+            border-left: 4px solid var(--medium);
+        }
+        
+        .exercici.hard {
+            border-left: 4px solid var(--hard);
+        }
+        
+        .difficulty-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+        }
+        
+        .difficulty-label.easy {
+            background-color: rgba(6, 214, 160, 0.2);
+            color: var(--easy);
+        }
+        
+        .difficulty-label.medium {
+            background-color: rgba(255, 209, 102, 0.2);
+            color: var(--medium);
+        }
+        
+        .difficulty-label.hard {
+            background-color: rgba(239, 71, 111, 0.2);
+            color: var(--hard);
+        }
+        
+        .exercici:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .exercici h4 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+        }
+        
+        .exercici p {
+            margin-bottom: 1rem;
+        }
+        
+        .resposta {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: rgba(72, 149, 239, 0.1);
+            border-radius: 5px;
+        }
+        
+        .resposta.show {
+            max-height: 500px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .resposta p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .resposta .correcta {
+            color: var(--math-green);
+            font-weight: 700;
+        }
+        
+        .truc {
+            background-color: #fff3cd;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--math-orange);
+        }
+        
+        .truc h5 {
+            color: var(--math-orange);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .truc h5 i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Progress Section */
+        .progress-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+        
+        .progress-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--math-orange);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            padding: 1.5rem;
+        }
+        
+        .stat h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--math-orange);
+        }
+        
+        /* Recompenses */
+        .recompenses {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .badges-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .badge {
+            width: 100px;
+            height: 100px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            opacity: 0.3;
+        }
+        
+        .badge.unlocked {
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .badge i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge span {
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .footer-col h3 {
+            color: var(--math-orange);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--math-orange);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #adb5bd;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-btns {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .exercicis-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .difficulty-tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .difficulty-tab {
+                border-bottom: 2px solid #eee;
+            }
+            
+            .difficulty-tab.active::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-square-root-alt"></i>
+                <span>MathGenius Pro</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#temes">Temes</a></li>
+                    <li><a href="#progress">Progress</a></li>
+                    <li><a href="#recompenses">Recompenses</a></li>
+                    <li><a href="#" class="btn">Inicia Sessió</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Aprèn Matemàtiques Divertint-te</h1>
+            <p>La plataforma educativa més completa per dominar fraccions, percentatges, unitats de mesura i més. Dissenyada especialment per a nens de 6è de primària.</p>
+            <div class="hero-btns">
+                <a href="#temes" class="btn">Comença Ara</a>
+                <a href="#" class="btn btn-outline">Mira el Vídeo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Per què triar MathGenius Pro?</h2>
+            <p>La nostra plataforma ofereix tot el que necessites per convertir-te en un geni de les matemàtiques</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Aprenentatge Lúdic</h3>
+                <p>Jocs interactius que fan l'aprenentatge divertit i motivador</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Contingut Educatiu</h3>
+                <p>Explicacions clares i exercicis adaptats al teu nivell</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>Sistema de Recompenses</h3>
+                <p>Guanya medalles i insígnies mentre aprens</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Temes -->
+    <section class="temes" id="temes">
+        <div class="section-title">
+            <h2>Explora els Temes</h2>
+            <p>Selecciona un tema per començar a practicar amb exercicis interactius</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="fraccions">Fraccions</button>
+            <button class="tab-btn" data-tab="percentatges">Percentatges</button>
+            <button class="tab-btn" data-tab="unitats">Unitats de Mesura</button>
+            <button class="tab-btn" data-tab="proporcionalitat">Proporcionalitat</button>
+            <button class="tab-btn" data-tab="decimals">Decimals</button>
+        </div>
+        
+        <div class="tab-content">
+            <!-- Fraccions -->
+            <div class="tema active" id="fraccions">
+                <div class="tema-header">
+                    <div class="tema-icon">
+                        <i class="fas fa-pizza-slice"></i>
+                    </div>
+                    <h3>Fraccions</h3>
+                </div>
+                
+                <div class="difficulty-tabs">
+                    <div class="difficulty-tab easy active" data-difficulty="easy-fraccions">Fàcil</div>
+                    <div class="difficulty-tab medium" data-difficulty="medium-fraccions">Mitjà</div>
+                    <div class="difficulty-tab hard" data-difficulty="hard-fraccions">Difícil</div>
+                </div>
+                
+                <!-- Exercicis Fàcils -->
+                <div class="exercicis-container active" id="easy-fraccions">
+                    <div class="exercicis-grid">
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Simplificació de Fraccions</h4>
+                            <p>Simplifica la fracció 18/24</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f1')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f1">
+                                <p class="correcta">Resposta: 3/4</p>
+                                <p>Explicació: Trobem el MCD de 18 i 24 que és 6. Dividim numerador i denominador per 6.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Suma de Fraccions</h4>
+                            <p>Calcula: 1/3 + 1/6</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f2')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f2">
+                                <p class="correcta">Resposta: 1/2</p>
+                                <p>Explicació: Trobem denominador comú (6). Convertim 1/3 a 2/6. Sumem: 2/6 + 1/6 = 3/6 = 1/2</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Multiplicació de Fraccions</h4>
+                            <p>Calcula: 2/5 × 3/4</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f3')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f3">
+                                <p class="correcta">Resposta: 3/10</p>
+                                <p>Explicació: Multipliquem numeradors (2×3=6) i denominadors (5×4=20). Simplifiquem 6/20 a 3/10.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Fracció d'un Nombre</h4>
+                            <p>Calcula els 3/5 de 45</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f4')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f4">
+                                <p class="correcta">Resposta: 27</p>
+                                <p>Explicació: Dividim 45 entre 5 (9) i multipliquem per 3: 9 × 3 = 27</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Mitjans -->
+                <div class="exercicis-container" id="medium-fraccions">
+                    <div class="exercicis-grid">
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Suma de Fraccions Mixtes</h4>
+                            <p>Calcula: 2 1/4 + 3 2/3</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f5')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f5">
+                                <p class="correcta">Resposta: 5 11/12</p>
+                                <p>Explicació: Convertim a fraccions impropies: 9/4 + 11/3. Denominador comú 12: 27/12 + 44/12 = 71/12 = 5 11/12</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Divisió de Fraccions</h4>
+                            <p>Calcula: 3/8 ÷ 2/5</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f6')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f6">
+                                <p class="correcta">Resposta: 15/16</p>
+                                <p>Explicació: Multipliquem per l'inversa: 3/8 × 5/2 = 15/16</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Fraccions Equivalentes</h4>
+                            <p>Troba una fracció equivalent a 5/7 amb denominador 42</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f7')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f7">
+                                <p class="correcta">Resposta: 30/42</p>
+                                <p>Explicació: 42 ÷ 7 = 6. Multipliquem numerador i denominador per 6: 5×6 / 7×6 = 30/42</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Comparació de Fraccions</h4>
+                            <p>Quina és més gran: 4/9 o 5/11?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f8')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f8">
+                                <p class="correcta">Resposta: 4/9</p>
+                                <p>Explicació: Productes creuats: 4×11=44 i 5×9=45. Com que 44 < 45, 4/9 < 5/11</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Difícils -->
+                <div class="exercicis-container" id="hard-fraccions">
+                    <div class="exercicis-grid">
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Operacions Combinades</h4>
+                            <p>Calcula: (3/4 + 1/2) × (5/6 - 1/3)</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f9')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f9">
+                                <p class="correcta">Resposta: 5/8</p>
+                                <p>Explicació: 1r parèntesi: 3/4 + 2/4 = 5/4. 2n parèntesi: 5/6 - 2/6 = 3/6 = 1/2. Multiplicació: 5/4 × 1/2 = 5/8</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema amb Fraccions</h4>
+                            <p>Si em gasto 2/5 dels meus estalvis en un llibre i 1/3 del que em queda en un joc, quina fracció dels estalvis originals em queda?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f10')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f10">
+                                <p class="correcta">Resposta: 2/5</p>
+                                <p>Explicació: Després del llibre queden 3/5. 1/3 de 3/5 = 1/5. Total gastat: 2/5 + 1/5 = 3/5. Queda: 2/5</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Fraccions i Decimals</h4>
+                            <p>Expressa 0.375 com a fracció irreductible</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f11')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f11">
+                                <p class="correcta">Resposta: 3/8</p>
+                                <p>Explicació: 0.375 = 375/1000 = 15/40 = 3/8</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Equacions amb Fraccions</h4>
+                            <p>Resol: x + 1/4 = 5/6</p>
+                            <button class="btn" onclick="toggleResposta('resposta-f12')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-f12">
+                                <p class="correcta">Resposta: x = 7/12</p>
+                                <p>Explicació: x = 5/6 - 1/4 = 10/12 - 3/12 = 7/12</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="truc">
+                    <h5><i class="fas fa-lightbulb"></i> Truc Important</h5>
+                    <p>Pensa en les fraccions com a parts d'una pizza. Si tens 3/4 d'una pizza i 2/4 d'una altra, en total tens 5/4 (que és 1 pizza sencera i 1/4 més). Per multiplicar fraccions, multiplica "en línia recta" (numerador × numerador i denominador × denominador). Per dividir, recorda la regla: "manté, canvia, gira" (mantén la primera fracció, canvia el signe de divisió per multiplicació, gira la segona fracció).</p>
+                </div>
+            </div>
+            
+            <!-- Percentatges -->
+            <div class="tema" id="percentatges">
+                <div class="tema-header">
+                    <div class="tema-icon">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <h3>Percentatges</h3>
+                </div>
+                
+                <div class="difficulty-tabs">
+                    <div class="difficulty-tab easy active" data-difficulty="easy-percentatges">Fàcil</div>
+                    <div class="difficulty-tab medium" data-difficulty="medium-percentatges">Mitjà</div>
+                    <div class="difficulty-tab hard" data-difficulty="hard-percentatges">Difícil</div>
+                </div>
+                
+                <!-- Exercicis Fàcils -->
+                <div class="exercicis-container active" id="easy-percentatges">
+                    <div class="exercicis-grid">
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Càlcul de Percentatge</h4>
+                            <p>Calcula el 30% de 150</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p1')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p1">
+                                <p class="correcta">Resposta: 45</p>
+                                <p>Explicació: 30% vol dir 30 de cada 100. Per tant: (30 × 150) ÷ 100 = 45</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Descomptes</h4>
+                            <p>Un joc val 60€ i té un 25% de descompte. Quant costa ara?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p2')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p2">
+                                <p class="correcta">Resposta: 45€</p>
+                                <p>Explicació: 25% de 60€ = 15€. Restem: 60€ - 15€ = 45€</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Increments</h4>
+                            <p>Si una ciutat tenia 200.000 habitants i ha crescut un 15%, quants habitants té ara?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p3')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p3">
+                                <p class="correcta">Resposta: 230.000</p>
+                                <p>Explicació: 15% de 200.000 = 30.000. Sumem: 200.000 + 30.000 = 230.000</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Percentatge a Fracció</h4>
+                            <p>Expressa el 75% com a fracció irreductible</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p4')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p4">
+                                <p class="correcta">Resposta: 3/4</p>
+                                <p>Explicació: 75% = 75/100 = 3/4</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Mitjans -->
+                <div class="exercicis-container" id="medium-percentatges">
+                    <div class="exercicis-grid">
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Percentatge d'Augment</h4>
+                            <p>Un producte passà de costar 80€ a 100€. Quin percentatge augmentà?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p5')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p5">
+                                <p class="correcta">Resposta: 25%</p>
+                                <p>Explicació: Augment = 100€ - 80€ = 20€. Percentatge: (20/80) × 100 = 25%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Percentatge de Disminució</h4>
+                            <p>Un ordinador valia 900€ i ara val 720€. Quin percentatge disminuí?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p6')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p6">
+                                <p class="correcta">Resposta: 20%</p>
+                                <p>Explicació: Disminució = 900€ - 720€ = 180€. Percentatge: (180/900) × 100 = 20%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Percentatges Successius</h4>
+                            <p>Un article de 200€ augmenta un 10% i després un 15%. Quin és el preu final?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p7')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p7">
+                                <p class="correcta">Resposta: 253€</p>
+                                <p>Explicació: 1r augment: 200 + 10% = 220€. 2n augment: 220 + 15% = 253€</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Percentatge d'una Quantitat</h4>
+                            <p>Si 12 alumnes d'una classe de 30 porten ulleres, quin percentatge representa?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p8')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p8">
+                                <p class="correcta">Resposta: 40%</p>
+                                <p>Explicació: (12 ÷ 30) × 100 = 40%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Difícils -->
+                <div class="exercicis-container" id="hard-percentatges">
+                    <div class="exercicis-grid">
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Percentatges Inversos</h4>
+                            <p>Després d'un augment del 20%, un producte val 144€. Quin era el seu preu original?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p9')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p9">
+                                <p class="correcta">Resposta: 120€</p>
+                                <p>Explicació: 144€ = 120% del preu original. Preu original = 144 ÷ 1.20 = 120€</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Percentatges Compostos</h4>
+                            <p>Si una població augmenta un 5% anual, quants habitants tindrà després de 3 anys si ara en té 10.000?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p10')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p10">
+                                <p class="correcta">Resposta: 11.576 (aprox.)</p>
+                                <p>Explicació: 10.000 × (1.05)^3 = 10.000 × 1.157625 ≈ 11.576</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Percentatges i Fraccions</h4>
+                            <p>Si el 40% d'un nombre és 28, quin és el 75% d'aquest nombre?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p11')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p11">
+                                <p class="correcta">Resposta: 52.5</p>
+                                <p>Explicació: Nombre complet = 28 ÷ 0.40 = 70. 75% de 70 = 0.75 × 70 = 52.5</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Percentatge de Benefici</h4>
+                            <p>Un comerciant compra un producte per 150€ i el ven per 210€. Quin percentatge de benefici obté?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-p12')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-p12">
+                                <p class="correcta">Resposta: 40%</p>
+                                <p>Explicació: Benefici = 210€ - 150€ = 60€. Percentatge: (60/150) × 100 = 40%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="truc">
+                    <h5><i class="fas fa-lightbulb"></i> Truc Important</h5>
+                    <p>El % significa "de cada 100". Per calcular el 10% d'un nombre, simplement divideix per 10. Per calcular el 50%, divideix per 2. Per al 25%, divideix per 4. Per calcular percentatges mentals, pots descompondre: per exemple, el 15% és el 10% més el 5%. Per a augments o descomptes successius, recorda que cada canvi s'aplica sobre el nou valor, no sobre l'original.</p>
+                </div>
+            </div>
+            
+            <!-- Unitats de Mesura -->
+            <div class="tema" id="unitats">
+                <div class="tema-header">
+                    <div class="tema-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3>Unitats de Mesura</h3>
+                </div>
+                
+                <div class="difficulty-tabs">
+                    <div class="difficulty-tab easy active" data-difficulty="easy-unitats">Fàcil</div>
+                    <div class="difficulty-tab medium" data-difficulty="medium-unitats">Mitjà</div>
+                    <div class="difficulty-tab hard" data-difficulty="hard-unitats">Difícil</div>
+                </div>
+                
+                <!-- Exercicis Fàcils -->
+                <div class="exercicis-container active" id="easy-unitats">
+                    <div class="exercicis-grid">
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Conversió de Longitud</h4>
+                            <p>Converteix 2,3 km a metres</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u1')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u1">
+                                <p class="correcta">Resposta: 2.300 m</p>
+                                <p>Explicació: Cada km té 1.000 m. Per tant: 2,3 km × 1.000 = 2.300 m</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Conversió de Capacitat</h4>
+                            <p>Converteix 4,5 litres a mil·lilitres</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u2')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u2">
+                                <p class="correcta">Resposta: 4.500 ml</p>
+                                <p>Explicació: Cada litre té 1.000 ml. Per tant: 4,5 l × 1.000 = 4.500 ml</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Conversió de Massa</h4>
+                            <p>Converteix 3.500 grams a quilograms</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u3')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u3">
+                                <p class="correcta">Resposta: 3,5 kg</p>
+                                <p>Explicació: Cada kg té 1.000 g. Per tant: 3.500 g ÷ 1.000 = 3,5 kg</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Conversió de Temps</h4>
+                            <p>Converteix 2 hores i mitja a minuts</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u4')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u4">
+                                <p class="correcta">Resposta: 150 minuts</p>
+                                <p>Explicació: 2 hores = 120 minuts, mitja hora = 30 minuts. Total: 120 + 30 = 150 minuts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Mitjans -->
+                <div class="exercicis-container" id="medium-unitats">
+                    <div class="exercicis-grid">
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Conversió Complexa</h4>
+                            <p>Converteix 1,25 km a centímetres</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u5')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u5">
+                                <p class="correcta">Resposta: 125.000 cm</p>
+                                <p>Explicació: 1,25 km = 1.250 m = 125.000 cm</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Operacions amb Unitats</h4>
+                            <p>Suma 1,2 km + 450 m i dóna el resultat en metres</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u6')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u6">
+                                <p class="correcta">Resposta: 1.650 m</p>
+                                <p>Explicació: 1,2 km = 1.200 m. 1.200 m + 450 m = 1.650 m</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Conversió de Superfície</h4>
+                            <p>Converteix 5 m² a cm²</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u7')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u7">
+                                <p class="correcta">Resposta: 50.000 cm²</p>
+                                <p>Explicació: 1 m² = 10.000 cm². 5 m² = 50.000 cm²</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Problema de Capacitat</h4>
+                            <p>Quants gots de 250 ml es poden omplir amb una ampolla de 2 litres?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u8')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u8">
+                                <p class="correcta">Resposta: 8 gots</p>
+                                <p>Explicació: 2 litres = 2.000 ml. 2.000 ÷ 250 = 8</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Difícils -->
+                <div class="exercicis-container" id="hard-unitats">
+                    <div class="exercicis-grid">
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Conversió de Volum</h4>
+                            <p>Converteix 3,5 dm³ a cm³</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u9')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u9">
+                                <p class="correcta">Resposta: 3.500 cm³</p>
+                                <p>Explicació: 1 dm³ = 1.000 cm³. 3,5 dm³ = 3.500 cm³</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Velocitat</h4>
+                            <p>Un cotxe va a 90 km/h. Quants metres recorre en 30 segons?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u10')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u10">
+                                <p class="correcta">Resposta: 750 m</p>
+                                <p>Explicació: 90 km/h = 90.000 m/3.600 s = 25 m/s. En 30 s: 25 × 30 = 750 m</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Densitat</h4>
+                            <p>Un objecte té una massa de 500 g i ocupa un volum de 250 cm³. Quina és la seva densitat en g/cm³?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u11')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u11">
+                                <p class="correcta">Resposta: 2 g/cm³</p>
+                                <p>Explicació: Densitat = massa/volum = 500 g / 250 cm³ = 2 g/cm³</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Temps</h4>
+                            <p>Una pel·lícula dura 2 hores i 15 minuts. Si comença a les 18:45, a quina hora acabarà?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-u12')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-u12">
+                                <p class="correcta">Resposta: 21:00</p>
+                                <p>Explicació: 18:45 + 2 hores = 20:45. 20:45 + 15 minuts = 21:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="truc">
+                    <h5><i class="fas fa-lightbulb"></i> Truc Important</h5>
+                    <p>Recorda aquesta escala per a longituds: km → hm → dam → m → dm → cm → mm. Cada pas a la dreta multiplica per 10, cada pas a l'esquerra divideix per 10! Per a superfícies, cada pas multiplica o divideix per 100. Per a volums, per 1.000. Per convertir unitats de temps, recorda que 1 hora = 60 minuts = 3.600 segons. Per a problemes de velocitat, la fórmula és: velocitat = distància / temps.</p>
+                </div>
+            </div>
+            
+            <!-- Proporcionalitat -->
+            <div class="tema" id="proporcionalitat">
+                <div class="tema-header">
+                    <div class="tema-icon">
+                        <i class="fas fa-balance-scale-right"></i>
+                    </div>
+                    <h3>Proporcionalitat</h3>
+                </div>
+                
+                <div class="difficulty-tabs">
+                    <div class="difficulty-tab easy active" data-difficulty="easy-proporcionalitat">Fàcil</div>
+                    <div class="difficulty-tab medium" data-difficulty="medium-proporcionalitat">Mitjà</div>
+                    <div class="difficulty-tab hard" data-difficulty="hard-proporcionalitat">Difícil</div>
+                </div>
+                
+                <!-- Exercicis Fàcils -->
+                <div class="exercicis-container active" id="easy-proporcionalitat">
+                    <div class="exercicis-grid">
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Regla de Tres Simple</h4>
+                            <p>Si 6 bolígrafs costen 4,20€, quant costaran 10 bolígrafs?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr1')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr1">
+                                <p class="correcta">Resposta: 7€</p>
+                                <p>Explicació: Primer trobem el preu d'un bolígraf: 4,20€ ÷ 6 = 0,70€. Llavors multipliquem per 10: 0,70€ × 10 = 7€</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Proporcions</h4>
+                            <p>Si 3 pastissos necessiten 6 ous, quants ous necessitaré per a 7 pastissos?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr2')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr2">
+                                <p class="correcta">Resposta: 14 ous</p>
+                                <p>Explicació: Primer trobem ous per pastís: 6 ÷ 3 = 2 ous/pastís. Llavors multipliquem per 7: 2 × 7 = 14 ous</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Percentatges i Proporcions</h4>
+                            <p>Si una classe té 25 alumnes i el 40% són noies, quantes noies hi ha?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr3')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr3">
+                                <p class="correcta">Resposta: 10 noies</p>
+                                <p>Explicació: 40% de 25 = (40 × 25) ÷ 100 = 10 noies</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Raó i Proporció</h4>
+                            <p>Simplifica la raó 18:24</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr4')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr4">
+                                <p class="correcta">Resposta: 3:4</p>
+                                <p>Explicació: Dividim ambdós termes per 6 (MCD de 18 i 24)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Mitjans -->
+                <div class="exercicis-container" id="medium-proporcionalitat">
+                    <div class="exercicis-grid">
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Proporcionalitat Inversa</h4>
+                            <p>Si 5 obrers acaben una feina en 12 dies, quant tardaran 6 obrers?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr5')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr5">
+                                <p class="correcta">Resposta: 10 dies</p>
+                                <p>Explicació: És proporcionalitat inversa: 5 obrers × 12 dies = 6 obrers × x dies → x = (5×12)/6 = 10 dies</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Escales</h4>
+                            <p>En un mapa amb escala 1:25.000, quina distància real representen 8 cm al mapa?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr6')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr6">
+                                <p class="correcta">Resposta: 2 km</p>
+                                <p>Explicació: 8 cm × 25.000 = 200.000 cm = 2.000 m = 2 km</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Repartiment Proporcional</h4>
+                            <p>Reparteix 150€ en parts proporcionals a 2, 3 i 5</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr7')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr7">
+                                <p class="correcta">Resposta: 30€, 45€, 75€</p>
+                                <p>Explicació: Parts totals = 2+3+5=10. 150€/10=15€ per part. 2×15=30€, 3×15=45€, 5×15=75€</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Percentatges Successius</h4>
+                            <p>Un producte augmenta un 20% i després un 10%. Quin és l'augment total?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr8')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr8">
+                                <p class="correcta">Resposta: 32%</p>
+                                <p>Explicació: 1,20 × 1,10 = 1,32 → Augment del 32%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Difícils -->
+                <div class="exercicis-container" id="hard-proporcionalitat">
+                    <div class="exercicis-grid">
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Proporcionalitat Composta</h4>
+                            <p>Si 10 màquines treballant 8 hores diàries produeixen 1.000 unitats en 5 dies, quantes unitats produiran 15 màquines treballant 6 hores diàries en 10 dies?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr9')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr9">
+                                <p class="correcta">Resposta: 2.250 unitats</p>
+                                <p>Explicació: Relació màquines: 15/10 = 1,5. Relació hores: 6/8 = 0,75. Relació dies: 10/5 = 2. Producció = 1.000 × 1,5 × 0,75 × 2 = 2.250</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Barreges</h4>
+                            <p>Barregem 2 litres d'un producte de 5€/litre amb 3 litres d'un altre de 7€/litre. Quin és el preu mitjà del litre de la barreja?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr10')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr10">
+                                <p class="correcta">Resposta: 6,2€/litre</p>
+                                <p>Explicació: Cost total = (2×5) + (3×7) = 10 + 21 = 31€. Total litres = 5. Preu mitjà = 31/5 = 6,2€/litre</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Velocitat</h4>
+                            <p>Un cotxe va de A a B a 80 km/h i torna a 60 km/h. Quina és la seva velocitat mitjana en tot el trajecte?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr11')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr11">
+                                <p class="correcta">Resposta: 68,57 km/h</p>
+                                <p>Explicació: Suposem distància AB = d. Temps anada = d/80. Temps tornada = d/60. Velocitat mitjana = distància total / temps total = 2d / (d/80 + d/60) = 2 / (1/80 + 1/60) ≈ 68,57 km/h</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Rendiment</h4>
+                            <p>Una aixeta omple un dipòsit en 3 hores i una altra el buida en 6 hores. Si obrim les dues a la vegada, en quant temps s'omplirà el dipòsit?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-pr12')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-pr12">
+                                <p class="correcta">Resposta: 6 hores</p>
+                                <p>Explicació: Aixeta que omple: 1/3 dipòsit per hora. Aixeta que buida: 1/6 dipòsit per hora. Efecte net: 1/3 - 1/6 = 1/6 per hora. Temps per omplir: 1 ÷ (1/6) = 6 hores</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="truc">
+                    <h5><i class="fas fa-lightbulb"></i> Truc Important</h5>
+                    <p>La proporcionalitat és com una recepta de cuina. Si dupliques els ingredients, dupliques el resultat. Sempre manté la mateixa proporció entre les quantitats! Per a problemes de proporcionalitat composta, analitza cada factor per separat. Per a barreges, calcula sempre el total de cada component i després la mitjana. Recorda que en proporcionalitat inversa, el producte de les magnituds relacionades és constant.</p>
+                </div>
+            </div>
+            
+            <!-- Decimals -->
+            <div class="tema" id="decimals">
+                <div class="tema-header">
+                    <div class="tema-icon">
+                        <i class="fas fa-decimal-point"></i>
+                    </div>
+                    <h3>Decimals</h3>
+                </div>
+                
+                <div class="difficulty-tabs">
+                    <div class="difficulty-tab easy active" data-difficulty="easy-decimals">Fàcil</div>
+                    <div class="difficulty-tab medium" data-difficulty="medium-decimals">Mitjà</div>
+                    <div class="difficulty-tab hard" data-difficulty="hard-decimals">Difícil</div>
+                </div>
+                
+                <!-- Exercicis Fàcils -->
+                <div class="exercicis-container active" id="easy-decimals">
+                    <div class="exercicis-grid">
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Suma de Decimals</h4>
+                            <p>Calcula: 4,75 + 3,2</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d1')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d1">
+                                <p class="correcta">Resposta: 7,95</p>
+                                <p>Explicació: Alinea els decimals: 4,75 + 3,20 = 7,95</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Multiplicació de Decimals</h4>
+                            <p>Calcula: 2,5 × 1,2</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d2')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d2">
+                                <p class="correcta">Resposta: 3</p>
+                                <p>Explicació: Multiplica com si fossin enters (25 × 12 = 300) i posa dos decimals al resultat: 3,00 = 3</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Divisió de Decimals</h4>
+                            <p>Calcula: 4,8 ÷ 0,6</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d3')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d3">
+                                <p class="correcta">Resposta: 8</p>
+                                <p>Explicació: Multiplica numerador i denominador per 10 per eliminar decimals: 48 ÷ 6 = 8</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici easy">
+                            <span class="difficulty-label easy">Fàcil</span>
+                            <h4>Arrodoniment</h4>
+                            <p>Arrodoneix 7,856 a dues xifres decimals</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d4')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d4">
+                                <p class="correcta">Resposta: 7,86</p>
+                                <p>Explicació: La tercera xifra decimal és 6 (≥5), per tant arrodonim la segona xifra cap amunt: 7,85 → 7,86</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Mitjans -->
+                <div class="exercicis-container" id="medium-decimals">
+                    <div class="exercicis-grid">
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Operacions Combinades</h4>
+                            <p>Calcula: (4,5 × 2) - (6,3 ÷ 3)</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d5')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d5">
+                                <p class="correcta">Resposta: 6,9</p>
+                                <p>Explicació: 4,5 × 2 = 9. 6,3 ÷ 3 = 2,1. 9 - 2,1 = 6,9</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Divisió amb Decimals</h4>
+                            <p>Calcula: 7,5 ÷ 0,25</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d6')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d6">
+                                <p class="correcta">Resposta: 30</p>
+                                <p>Explicació: Multipliquem numerador i denominador per 100: 750 ÷ 25 = 30</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Fracció a Decimal</h4>
+                            <p>Expressa 5/8 com a nombre decimal</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d7')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d7">
+                                <p class="correcta">Resposta: 0,625</p>
+                                <p>Explicació: 5 ÷ 8 = 0,625</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici medium">
+                            <span class="difficulty-label medium">Mitjà</span>
+                            <h4>Problema de Diners</h4>
+                            <p>Si compres 3 articles a 2,75€ cada un i pagues amb un bitllet de 10€, quant canvi rebràs?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d8')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d8">
+                                <p class="correcta">Resposta: 1,75€</p>
+                                <p>Explicació: Cost total = 3 × 2,75 = 8,25€. Canvi = 10 - 8,25 = 1,75€</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Exercicis Difícils -->
+                <div class="exercicis-container" id="hard-decimals">
+                    <div class="exercicis-grid">
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Operacions Complexes</h4>
+                            <p>Calcula: (0,3 × 1,5) + (2,4 ÷ 0,8) - (1,2 × 0,5)</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d9')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d9">
+                                <p class="correcta">Resposta: 2,25</p>
+                                <p>Explicació: 0,3 × 1,5 = 0,45. 2,4 ÷ 0,8 = 3. 1,2 × 0,5 = 0,6. 0,45 + 3 - 0,6 = 2,85 - 0,6 = 2,25</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Percentatges</h4>
+                            <p>Un producte val 80€. Primer augmenta un 15% i després es fa un descompte del 20%. Quin és el preu final?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d10')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d10">
+                                <p class="correcta">Resposta: 73,6€</p>
+                                <p>Explicació: Augment: 80 + 15% = 92€. Descompte: 92 - 20% = 73,6€</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Decimal Periòdic</h4>
+                            <p>Expressa 0,666... com a fracció irreductible</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d11')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d11">
+                                <p class="correcta">Resposta: 2/3</p>
+                                <p>Explicació: Sigui x = 0,666... Llavors 10x = 6,666... Restant: 9x = 6 → x = 6/9 = 2/3</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercici hard">
+                            <span class="difficulty-label hard">Difícil</span>
+                            <h4>Problema de Mitjanes</h4>
+                            <p>Les notes de 5 exàmens són: 7,5; 8,0; 6,5; 9,0 i 7,0. Quina és la mitjana?</p>
+                            <button class="btn" onclick="toggleResposta('resposta-d12')">Mostra Resposta</button>
+                            <div class="resposta" id="resposta-d12">
+                                <p class="correcta">Resposta: 7,6</p>
+                                <p>Explicació: Suma = 7,5 + 8,0 + 6,5 + 9,0 + 7,0 = 38. Mitjana = 38 ÷ 5 = 7,6</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="truc">
+                    <h5><i class="fas fa-lightbulb"></i> Truc Important</h5>
+                    <p>Els decimals són com fraccions! 0,5 és 1/2, 0,25 és 1/4 i 0,1 és 1/10. Si tens dubtes, converteix els decimals a fraccions per fer els càlculs més fàcils. Per multiplicar decimals, multiplica com si fossin nombres enters i després posa tants decimals com la suma de decimals dels factors. Per dividir, elimina els decimals del divisor multiplicant numerador i denominador per la potència de 10 adequada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="progress-section" id="progress">
+        <div class="progress-container">
+            <h2>El Teu Progress</h2>
+            <p>Portes completat el 75% del camí per convertir-te en un geni de les matemàtiques!</p>
+            
+            <div class="progress-bar">
+                <div class="progress" style="width: 75%"></div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <h3>72</h3>
+                    <p>Exercicis Complets</p>
+                </div>
+                <div class="stat">
+                    <h3>15</h3>
+                    <p>Temes Dominats</p>
+                </div>
+                <div class="stat">
+                    <h3>92%</h3>
+                    <p>Èxit en Respostes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recompenses -->
+    <section class="recompenses" id="recompenses">
+        <div class="section-title">
+            <h2>Les Teves Recompenses</h2>
+            <p>Guanya medalles a mesura que avances en el teu aprenentatge</p>
+        </div>
+        
+        <div class="badges-container">
+            <div class="badge unlocked">
+                <i class="fas fa-star"></i>
+                <span>Iniciant</span>
+            </div>
+            <div class="badge unlocked">
+                <i class="fas fa-calculator"></i>
+                <span>Fraccions</span>
+            </div>
+            <div class="badge unlocked">
+                <i class="fas fa-percent"></i>
+                <span>Percentatges</span>
+            </div>
+            <div class="badge unlocked">
+                <i class="fas fa-ruler"></i>
+                <span>Unitats</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-balance-scale"></i>
+                <span>Proporcionalitat</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-medal"></i>
+                <span>Mestre</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-brain"></i>
+                <span>Expert</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-trophy"></i>
+                <span>Geni</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>MathGenius Pro</h3>
+                <p>La plataforma educativa més divertida per aprendre matemàtiques. Dissenyada especialment per a nens de 6è de primària.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Temes</h3>
+                <ul>
+                    <li><a href="#fraccions">Fraccions</a></li>
+                    <li><a href="#percentatges">Percentatges</a></li>
+                    <li><a href="#unitats">Unitats de Mesura</a></li>
+                    <li><a href="#proporcionalitat">Proporcionalitat</a></li>
+                    <li><a href="#decimals">Decimals</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Enllaços Útils</h3>
+                <ul>
+                    <li><a href="#">Com funciona</a></li>
+                    <li><a href="#">Preguntes Freqüents</a></li>
+                    <li><a href="#">Política de Privacitat</a></li>
+                    <li><a href="#">Termes i Condicions</a></li>
+                    <li><a href="#">Contacta'ns</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 MathGenius Pro. Tots els drets reservats.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle respostes
+        function toggleResposta(id) {
+            const resposta = document.getElementById(id);
+            resposta.classList.toggle('show');
+            
+            // Canviar text del botó
+            const btn = resposta.previousElementSibling;
+            if (resposta.classList.contains('show')) {
+                btn.textContent = 'Amaga Resposta';
+            } else {
+                btn.textContent = 'Mostra Resposta';
+            }
+        }
+        
+        // Canviar temes
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const temes = document.querySelectorAll('.tema');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Eliminar active de tots els botons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                // Afegir active al botó clicat
+                btn.classList.add('active');
+                
+                // Amagar tots els temes
+                temes.forEach(tema => tema.classList.remove('active'));
+                // Mostrar tema corresponent
+                const temaId = btn.getAttribute('data-tab');
+                document.getElementById(temaId).classList.add('active');
+            });
+        });
+        
+        // Canviar dificultats
+        const difficultyTabs = document.querySelectorAll('.difficulty-tab');
+        
+        difficultyTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tema = tab.closest('.tema');
+                const difficultyId = tab.getAttribute('data-difficulty');
+                
+                // Eliminar active de totes les pestanyes de dificultat d'aquest tema
+                tema.querySelectorAll('.difficulty-tab').forEach(t => t.classList.remove('active'));
+                // Afegir active a la pestanya clicada
+                tab.classList.add('active');
+                
+                // Amagar tots els contenidors d'exercicis d'aquest tema
+                tema.querySelectorAll('.exercicis-container').forEach(c => c.classList.remove('active'));
+                // Mostrar el contenidor corresponent
+                document.getElementById(difficultyId).classList.add('active');
+            });
+        });
+        
+        // Animació de progress
+        window.addEventListener('load', () => {
+            const progressBar = document.querySelector('.progress');
+            progressBar.style.width = '75%';
+        });
+    </script>
+</body>
+</html>
