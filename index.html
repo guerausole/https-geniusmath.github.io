@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examify - Exàmens Fàcils</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .question {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        #exam-code-result {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e8f4f8;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Examify</h1>
+        
+        <!-- Secció principal -->
+        <div id="main-section" class="section">
+            <h2>Accés a l'examen</h2>
+            <input type="text" id="exam-code" placeholder="Introdueix el codi de l'examen">
+            <button id="access-btn">Accedir</button>
+            <p style="text-align: center;">o</p>
+            <button id="create-btn">Crear nou examen</button>
+        </div>
+        
+        <!-- Secció de creació -->
+        <div id="create-section" class="section hidden">
+            <h2>Crear nou examen</h2>
+            <input type="text" id="exam-title" placeholder="Títol de l'examen">
+            <div id="questions-container"></div>
+            <button id="add-question">Afegir pregunta</button>
+            <button id="save-exam">Desar examen</button>
+            <button id="cancel-create">Cancel·lar</button>
+        </div>
+        
+        <!-- Secció de l'examen -->
+        <div id="quiz-section" class="section hidden">
+            <h2 id="quiz-title"></h2>
+            <div id="quiz-questions"></div>
+            <button id="submit-quiz">Enviar respostes</button>
+            <div id="quiz-results" class="hidden"></div>
+            <button id="back-to-main" class="hidden">Tornar</button>
+        </div>
+        
+        <!-- Secció de resultats de creació -->
+        <div id="result-section" class="section hidden">
+            <h2>Examen creat!</h2>
+            <p>El teu codi d'examen és:</p>
+            <div id="exam-code-result"></div>
+            <p>Comparteix aquest codi perquè altres puguin fer l'examen.</p>
+            <button id="copy-code">Copiar codi</button>
+            <button id="try-exam">Provar examen</button>
+            <button id="new-exam">Crear altre examen</button>
+        </div>
+    </div>
+
+    <script>
+        // Dades i variables
+        let exams = JSON.parse(localStorage.getItem('exams')) || [];
+        let currentExam = null;
+        
+        // Elements del DOM
+        const mainSection = document.getElementById('main-section');
+        const createSection = document.getElementById('create-section');
+        const quizSection = document.getElementById('quiz-section');
+        const resultSection = document.getElementById('result-section');
+        
+        // Funcions bàsiques
+        function showSection(section) {
+            mainSection.classList.add('hidden');
+            createSection.classList.add('hidden');
+            quizSection.classList.add('hidden');
+            resultSection.classList.add('hidden');
+            
+            document.getElementById(section).classList.remove('hidden');
+        }
+        
+        // Crear examen
+        document.getElementById('create-btn').addEventListener('click', () => {
+            showSection('create-section');
+            document.getElementById('exam-title').value = '';
+            document.getElementById('questions-container').innerHTML = '';
+            addQuestion();
+        });
+        
+        document.getElementById('add-question').addEventListener('click', addQuestion);
+        
+        function addQuestion() {
+            const container = document.getElementById('questions-container');
+            const questionId = Date.now();
+            
+            const questionHTML = `
+                <div class="question" id="question-${questionId}">
+                    <input type="text" class="question-text" placeholder="Text de la pregunta">
+                    <div class="options" id="options-${questionId}">
+                        <div class="option">
+                            <input type="radio" name="correct-${questionId}" value="0" checked>
+                            <input type="text" class="option-text" placeholder="Opció 1">
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="correct-${questionId}" value="1">
+                            <input type="text" class="option-text" placeholder="Opció 2">
+                        </div>
+                    </div>
+                    <button class="add-option" data-question="${questionId}">+ Opció</button>
+                    <button class="remove-question" data-question="${questionId}">Eliminar</button>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', questionHTML);
+            
+            // Afegir events
+            document.querySelector(`.add-option[data-question="${questionId}"]`).addEventListener('click', function() {
+                addOptionToQuestion(questionId);
+            });
+            
+            document.querySelector(`.remove-question[data-question="${questionId}"]`).addEventListener('click', function() {
+                if (document.querySelectorAll('.question').length > 1) {
+                    document.getElementById(`question-${questionId}`).remove();
+                } else {
+                    alert('L\'examen ha de tenir almenys una pregunta');
+                }
+            });
+        }
+        
+        function addOptionToQuestion(questionId) {
+            const optionsContainer = document.getElementById(`options-${questionId}`);
+            const optionCount = optionsContainer.querySelectorAll('.option').length;
+            
+            if (optionCount >= 4) {
+                alert('Màxim 4 opcions per pregunta');
+                return;
+            }
+            
+            const optionHTML = `
+                <div class="option">
+                    <input type="radio" name="correct-${questionId}" value="${optionCount}">
+                    <input type="text" class="option-text" placeholder="Opció ${optionCount + 1}">
+                </div>
+            `;
+            
+            optionsContainer.insertAdjacentHTML('beforeend', optionHTML);
+        }
+        
+        // Desar examen
+        document.getElementById('save-exam').addEventListener('click', saveExam);
+        
+        function saveExam() {
+            const title = document.getElementById('exam-title').value.trim();
+            if (!title) {
+                alert('Si us plau, afegeix un títol a l\'examen');
+                return;
+            }
+            
+            const questions = [];
+            const questionElements = document.querySelectorAll('.question');
+            
+            if (questionElements.length === 0) {
+                alert('Si us plau, afegeix almenys una pregunta');
+                return;
+            }
+            
+            let isValid = true;
+            questionElements.forEach(questionEl => {
+                const questionText = questionEl.querySelector('.question-text').value.trim();
+                const options = [];
+                
+                questionEl.querySelectorAll('.option').forEach(optionEl => {
+                    const optionText = optionEl.querySelector('.option-text').value.trim();
+                    if (optionText) {
+                        options.push(optionText);
+                    }
+                });
+                
+                if (!questionText || options.length < 2) {
+                    isValid = false;
+                }
+                
+                const correctAnswer = parseInt(questionEl.querySelector(`input[name^="correct"]:checked`).value);
+                
+                questions.push({
+                    text: questionText,
+                    options: options,
+                    correctAnswer: correctAnswer
+                });
+            });
+            
+            if (!isValid) {
+                alert('Si us plau, assegura\'t que totes les preguntes tenen text i almenys 2 opcions');
+                return;
+            }
+            
+            // Generar codi simple
+            const code = Math.random().toString(36).substring(2, 6).toUpperCase();
+            
+            const exam = {
+                code: code,
+                title: title,
+                questions: questions,
+                createdAt: new Date().toISOString()
+            };
+            
+            exams.push(exam);
+            localStorage.setItem('exams', JSON.stringify(exams));
+            
+            // Mostrar resultats
+            document.getElementById('exam-code-result').textContent = code;
+            currentExam = exam;
+            showSection('result-section');
+        }
+        
+        // Accedir a examen
+        document.getElementById('access-btn').addEventListener('click', accessExam);
+        
+        function accessExam() {
+            const code = document.getElementById('exam-code').value.trim().toUpperCase();
+            if (!code) {
+                alert('Si us plau, introdueix un codi');
+                return;
+            }
+            
+            const exam = exams.find(e => e.code === code);
+            if (!exam) {
+                alert('No s\'ha trobat cap examen amb aquest codi');
+                return;
+            }
+            
+            currentExam = exam;
+            loadQuiz(exam);
+            showSection('quiz-section');
+        }
+        
+        function loadQuiz(exam) {
+            document.getElementById('quiz-title').textContent = exam.title;
+            const container = document.getElementById('quiz-questions');
+            container.innerHTML = '';
+            
+            exam.questions.forEach((q, i) => {
+                const questionHTML = `
+                    <div class="question">
+                        <h3>${i+1}. ${q.text}</h3>
+                        <div class="options" id="quiz-options-${i}">
+                            ${q.options.map((opt, j) => `
+                                <div class="option">
+                                    <input type="radio" name="question-${i}" id="q${i}-o${j}" value="${j}">
+                                    <label for="q${i}-o${j}">${opt}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', questionHTML);
+            });
+            
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('back-to-main').classList.add('hidden');
+        }
+        
+        // Enviar respostes
+        document.getElementById('submit-quiz').addEventListener('click', submitQuiz);
+        
+        function submitQuiz() {
+            if (!currentExam) return;
+            
+            let score = 0;
+            const results = [];
+            
+            currentExam.questions.forEach((q, i) => {
+                const selected = document.querySelector(`input[name="question-${i}"]:checked`);
+                let isCorrect = false;
+                let userAnswer = null;
+                
+                if (selected) {
+                    userAnswer = parseInt(selected.value);
+                    isCorrect = userAnswer === q.correctAnswer;
+                    if (isCorrect) score++;
+                }
+                
+                results.push({
+                    question: q.text,
+                    userAnswer: userAnswer !== null ? q.options[userAnswer] : 'No contestada',
+                    correctAnswer: q.options[q.correctAnswer],
+                    isCorrect: isCorrect
+                });
+            });
+            
+            const percentage = Math.round((score / currentExam.questions.length) * 100);
+            let resultsHTML = `<h3>Resultat: ${score}/${currentExam.questions.length} (${percentage}%)</h3>`;
+            
+            results.forEach((res, i) => {
+                resultsHTML += `
+                    <div class="question ${res.isCorrect ? 'correct' : 'incorrect'}">
+                        <p><strong>Pregunta ${i+1}:</strong> ${res.question}</p>
+                        <p><strong>La teva resposta:</strong> ${res.userAnswer}</p>
+                        ${!res.isCorrect ? `<p><strong>Resposta correcta:</strong> ${res.correctAnswer}</p>` : ''}
+                    </div>
+                `;
+            });
+            
+            const resultsDiv = document.getElementById('quiz-results');
+            resultsDiv.innerHTML = resultsHTML;
+            resultsDiv.classList.remove('hidden');
+            document.getElementById('back-to-main').classList.remove('hidden');
+        }
+        
+        // Botons de navegació
+        document.getElementById('cancel-create').addEventListener('click', () => showSection('main-section'));
+        document.getElementById('back-to-main').addEventListener('click', () => showSection('main-section'));
+        document.getElementById('copy-code').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('exam-code-result').textContent);
+            alert('Codi copiat al porta-retalls!');
+        });
+        document.getElementById('try-exam').addEventListener('click', () => {
+            if (currentExam) {
+                loadQuiz(currentExam);
+                showSection('quiz-section');
+            }
+        });
+        document.getElementById('new-exam').addEventListener('click', () => {
+            showSection('create-section');
+            document.getElementById('exam-title').value = '';
+            document.getElementById('questions-container').innerHTML = '';
+            addQuestion();
+        });
+    </script>
+</body>
+</html>
